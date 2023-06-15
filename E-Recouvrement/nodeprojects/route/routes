@@ -1,0 +1,24 @@
+var express = require('express');
+var router = express.Router();
+
+var userController = require('../src/user/userController');
+var factureController = require('../src/facture/factureController');
+
+//----------------------------les routes de user--------------------------------
+router.route('/user/login').post(userController.loginUserControllerFn);
+router.route('/user/create').post(userController.createUserControllerFn);
+router.route('/user/send').post(userController.sendConfirmationEmail);
+router.route('/user/:email').get(userController.getUserByEmailControllerFn);
+router.route('/users/getAll').get(userController.getDataConntrollerfn);
+router.route('/user/:email/archive-and-delete').post(userController.archiveAndDeleteUserControllerFn);
+router.route('/users/:id').get(userController.getUserByIdControllerFn);
+router.route('/user/:id/update').post(userController.updateUserControllerFn);
+router.route('/archives/getAll').get(userController.getArchiveDataController);
+
+//------------------------------Routes de facture ---------------------------------
+router.route('/facture/create').post(factureController.createFactureControllerFn);
+router.route('/factures/getAll').get(factureController.getDataConntrollerfn);
+router.route('/facture/:email/archive-and-delete').post(factureController.archiveAndDeleteFactureControllerFn);
+router.route('/archivefactures/getAll').get(factureController.getArchiveFactureDataController);
+
+module.exports = router;
